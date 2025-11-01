@@ -1,5 +1,4 @@
-"use client"
-
+'use client'
 import Link from "next/link"
 import Image from 'next/image'
 import {
@@ -11,22 +10,26 @@ import {
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu"
+import { useEffect, useState } from "react";
+import { useAuth } from "@/app/AuthContext";
 
 export function Navigation() {
-    const logged = true
+    const { token } = useAuth();
+
+    
 
   return (
     <div className="w-full flex justify-center align-center p-[0px] 
     bg-transparent bg-gradient-to-br from-blue-700 to-green-700 text-black focus-visible:ring-green-600/20">
         <NavigationMenu className="w-full">
-            { logged &&
+            { token &&
             <NavigationMenuList className="min-w-[80vw] flex justify-between items-center">
                         <NavigationMenuItem>
                             <Image
                                 src="/chrismarketlogo.png" // caminho relativo à pasta public/
                                 alt="Descrição da imagem"
-                                width={100}
                                 height={50}
+                                width={100}
                                 className="bg-transparent p-0 m-0"
                                 priority // (opcional) carrega primeiro
                             />
@@ -43,7 +46,7 @@ export function Navigation() {
             }
 
 
-            { !logged &&
+            { !token &&
             <NavigationMenuList className="min-w-[80vw] flex justify-between items-center">
                         <NavigationMenuItem>
                             <Image

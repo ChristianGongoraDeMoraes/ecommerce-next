@@ -16,11 +16,15 @@ import {
 } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
 import { useState } from "react"
+import { useAuth } from "@/app/AuthContext"
+import { useRouter } from "next/navigation"
 
 export function Login({
   className,
   ...props
 }: React.ComponentProps<"div">) {
+  const router = useRouter(); 
+  const { login } = useAuth();
 
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
@@ -49,11 +53,13 @@ export function Login({
       setSuccess(true)
 
       // Exemplo: redirecionar ou salvar token
-      // localStorage.setItem("token", data.token)
-      // router.push("/dashboard")
+      login(data.accessToken)
+      document.cookie = `session=${data.accessToken}`;
+      await router.push("/market")
 
     } catch (err) {
       setError(true)
+      console.log(err)
     } finally {
       setLoading(false)
     }

@@ -1,6 +1,7 @@
 "use client"
 import { useEffect, useState } from "react";
 import ItemCard from "./ItemCard";
+import { useCart } from "@/app/CartContext";
 
 export type Items = {
     "id": number,
@@ -14,6 +15,7 @@ export function Market() {
     const [items, setItems] = useState<Items[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
+  const cart = useCart();
 
   useEffect(() => {
     const fetchItems = async () => {
@@ -38,9 +40,13 @@ export function Market() {
         setLoading(false)
       }
     }
-
+    
     fetchItems()
   }, [])
+  
+  const handleAddCart = (item: Items) =>{
+    cart.addToCart(item)
+  }
 
   if (loading) return <p>Loading items...</p>
   if (error) return <p className="text-red-500">{error}</p>
@@ -57,6 +63,7 @@ export function Market() {
                     price= {i.price}
                     amount_on_storage= {i.amount_on_storage}
                     description= {i.description}
+                    handler={handleAddCart}
                 />
             </div>
             )

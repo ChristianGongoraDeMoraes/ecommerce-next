@@ -1,10 +1,16 @@
+'use client'
 
+import { useCart } from "@/app/CartContext";
 import ItemCart from "./ItemCart";
-
+import { Items } from "../market/Market";
+import { useEffect, useState } from "react";
 
 export function Cart() {
-    const items = ['1', '2', '3']
-
+  const cart = useCart()
+  const [cartState, setCartState] = useState<any[]>([]);
+    useEffect(()=>{
+        setCartState(cart.cart)
+    },[])
   return (
     <div className="flex w-full gap-5 flex-wrap flex-col items-center justify-center bg-gray-300/40 rounded-lg">
             <div>
@@ -13,10 +19,16 @@ export function Cart() {
                 </h1>
             </div>
         <div className="w-[60%] m-auto rounded-lg flex items-center justify-center flex-col bg-gray-400/40 p-6 gap-6">
-            {items.map((i)=>{
+            {cartState.map((i: Items)=>{
                 return(
                 <div className="w-full">
-                    <ItemCart/>
+                    <ItemCart
+                        id={i.id}
+                        name= {i.name}
+                        price= {i.price}
+                        amount_on_storage= {i.amount_on_storage}
+                        description= {i.description}
+                    />
                 </div>
                 )
             })}
