@@ -1,7 +1,8 @@
 import { Card, CardContent, CardHeader, CardDescription, CardTitle, CardFooter } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
+import { Items } from '../market/Market'
 
-const ItemCard = () => {
+const ItemCard = (props: Items) => {
   return (
     <Card className='w-[200px] h-[300px] py-0 flex-col gap-0'>
       <CardContent className='grow-1 px-0 m-0'>
@@ -13,8 +14,9 @@ const ItemCard = () => {
       </CardContent>
       <div className='w-[100%]'>
         <CardHeader className='pt-3'>
-          <CardTitle>Dreamy Colorwave Gradient</CardTitle>
-          <CardDescription className='text-black font-medium'>R$: 10,00</CardDescription>
+          <CardTitle>{props.name}</CardTitle>
+          <CardDescription className='text-gray font-small'>{props.description}</CardDescription>
+          <CardDescription className='text-black font-medium'>{props.price}</CardDescription>
         </CardHeader>
         <CardFooter className='gap-3 py-3 flex flex-wrap'>
           <Button className='bg-transparent bg-gradient-to-br from-purple-500 to-pink-500 text-white focus-visible:ring-pink-600/20'>
