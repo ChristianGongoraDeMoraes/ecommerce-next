@@ -1,5 +1,4 @@
 'use client'
-import { cookies } from "next/headers";
 import { createContext, useContext, useEffect, useState, ReactNode } from "react";
 
 interface AuthContextType {
@@ -17,23 +16,22 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     async ()=>{
       const storedToken = sessionStorage.getItem("token");
-      const sessionDecoded = (await cookies()).get("session")?.value;
+      
       if (storedToken) setToken(storedToken);
-      if (sessionDecoded) setToken(sessionDecoded);
+      
     }
   }, []);
 
   // função de login
   const login = (newToken: string) => {
     sessionStorage.setItem("token", newToken);
-    document.cookie = `session=${newToken}`;
     setToken(newToken);
   };
 
   // função de logout
   const logout = () => {
     sessionStorage.removeItem("token");
-    document.cookie = `session=${null}`;
+    
     setToken(null);
   };
 

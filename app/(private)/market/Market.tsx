@@ -2,6 +2,9 @@
 import { useEffect, useState } from "react";
 import ItemCard from "./ItemCard";
 import { useCart } from "@/app/CartContext";
+import { request } from "http";
+import { jwtDecode } from "jwt-decode";
+
 
 export type Items = {
     "id": number,
@@ -12,38 +15,60 @@ export type Items = {
 }
 
 export function Market() {
-    const [items, setItems] = useState<Items[]>([])
+  const [items, setItems] = useState<Items[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
   const cart = useCart();
-
+  
   useEffect(() => {
-    const fetchItems = async () => {
-        // Fetch items from backend
-        try{
-        const response = await fetch(`http://localhost:3001/products`, {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        })
+    fetchItems()
+    getCart()
+  }, [])
+  const fetchItems = async () => {
+      // Fetch items from backend
+      try{
+      const response = await fetch(`http://localhost:3001/products`, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
 
-        if (!response.ok) {
-          const err = await response.json()
-          throw new Error(err.message || "Failed to load items.")
-        }
-
-        const data = await response.json()
-        setItems(data)
-      } catch (err: any) {
-        setError(err.message)
-      } finally {
-        setLoading(false)
+      if (!response.ok) {
+        const err = await response.json()
+        throw new Error(err.message || "Failed to load items.")
       }
+
+      const data = await response.json()
+      setItems(data)
+    } catch (err: any) {
+      setError(err.message)
+    } finally {
+      setLoading(false)
+    }
+  }
+  
+    
+   //get user cart
+  const getCart = async()=>{
+            const sessionDecoded = sessionStorage.getItem("token");
+            if(sessionDecoded){
+              const session:any = jwtDecode(sessionDecoded);
+              const  requestCarrinho = await fetch(`http://localhost:3001/carrinho/${session.sub}`, {
+                method: "GET",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+            });
+            const requestCarrinhodata  = await requestCarrinho.json()
+            cart.clearCart(requestCarrinhodata.Products)
+            //cartHandler = user.cart      
+      }
+        //each HandleAddCart
+        //PATCH -> user.cart
     }
     
-    fetchItems()
-  }, [])
   
+
   const handleAddCart = (item: Items) =>{
     cart.addToCart(item)
   }

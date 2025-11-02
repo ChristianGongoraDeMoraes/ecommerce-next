@@ -12,6 +12,7 @@ export default async function middleware(req: NextRequest) {
   const isPublicRoute = publicRoutes.includes(path);
 
   //const cookie = (await cookies()).get("session")?.value;
+  //const sessionDecoded = sessionStorage.getItem("token");
   const sessionDecoded = (await cookies()).get("session")?.value;
   if(sessionDecoded){
       //const session = await jwt.decode(sessionDecoded);

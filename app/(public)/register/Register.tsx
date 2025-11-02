@@ -60,11 +60,22 @@ export function Register({ ...props }: React.ComponentProps<typeof Card>) {
         const err = await response.json()
         throw new Error(err.message || "Registration failed")
       }
-
+      const responseParsed = await response.json()
+      await fetch(`http://localhost:3001/carrinho`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            PessoaId: responseParsed.id,
+            Products:[]
+          }),
+      });
       setSuccess(true)
       setFormData({ name: "", email: "", password: "", confirmPassword: "" })
     } catch (err: any) {
       setError(err.message)
+      console.log(err)
     } finally {
       setLoading(false)
     }

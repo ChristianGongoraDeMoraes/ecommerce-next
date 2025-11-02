@@ -54,6 +54,7 @@ export function Login({
 
       // Exemplo: redirecionar ou salvar token
       login(data.accessToken)
+      document.cookie = `session=${data.accessToken}`;
       await router.push("/market")
 
     } catch (err) {
