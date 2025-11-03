@@ -18,7 +18,8 @@ export function CartProvider({ children }: { children: ReactNode }) {
 
   // ao iniciar, verifica se há token no sessionStorage
   useEffect(() => {
-  }, []);
+    saveCart()
+  }, [cart]);
 
   const addToCart = (a:Items) =>{
     setCart([...cart, a])

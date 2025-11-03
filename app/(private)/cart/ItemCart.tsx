@@ -3,7 +3,17 @@ import { Card, CardContent, CardHeader, CardDescription, CardTitle, CardFooter }
 import { Button } from '@/components/ui/button'
 import { Items } from '../market/Market'
 
-const ItemCard = (props: Items) => {
+type ItemCart = {
+  "id": number,
+	"name": string,
+	"price": number,
+	"amount_on_storage": number,
+	"description": string,
+  handleRemoveToCart:(item: Items)=>void;
+}
+
+
+const ItemCard = (props: ItemCart) => {
   return (
     <Card className='w-full h-[200px] py-0 flex gap-0 flex-row'>
       <CardContent className='grow-1 px-0 m-0'>
@@ -20,7 +30,15 @@ const ItemCard = (props: Items) => {
           <CardDescription className='text-black font-medium'>{props.price}</CardDescription>
         </CardHeader>
         <CardFooter className='gap-3 py-3 flex flex-wrap'>
-          <Button className='bg-transparent bg-gradient-to-br from-red-500 to-white-500 text-white focus-visible:ring-pink-600/20'>
+          <Button 
+          onClick={()=>{props.handleRemoveToCart({
+            id: props.id,
+            name: props.name,
+            price: props.price,
+            amount_on_storage: props.amount_on_storage,
+            description: props.description,
+          })}}
+          className='bg-transparent bg-gradient-to-br from-red-500 to-white-500 text-white focus-visible:ring-pink-600/20'>
             Remove
           </Button>
         </CardFooter>

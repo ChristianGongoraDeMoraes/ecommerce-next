@@ -10,7 +10,22 @@ export function Cart() {
   const [cartState, setCartState] = useState<any[]>([]);
     useEffect(()=>{
         setCartState(cart.cart)
-    },[])
+    },[cart.cart])
+
+    const handleRemoveToCart = (i:Items) =>{
+        let found = false
+        const mpRemoved:Items[] = []
+        const cartArray = [...cart.cart];
+        cartArray.forEach((mp)=>{
+            if(i.id == mp.id && !(found)){
+                found = true
+            }else{
+                mpRemoved.push(mp)
+                
+            }
+        })
+        cart.clearCart([...mpRemoved]) 
+    }
   return (
     <div className="flex w-full gap-5 flex-wrap flex-col items-center justify-center bg-gray-300/40 rounded-lg">
             <div>
@@ -28,6 +43,7 @@ export function Cart() {
                         price= {i.price}
                         amount_on_storage= {i.amount_on_storage}
                         description= {i.description}
+                        handleRemoveToCart={handleRemoveToCart}
                     />
                 </div>
                 )

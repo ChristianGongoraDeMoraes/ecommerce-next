@@ -68,7 +68,6 @@ export function Market() {
 
   const handleAddCart = async (item: Items) =>{
     cart.addToCart(item)
-    cart.saveCart()
   }
 
   if (loading) return <p>Loading items...</p>
