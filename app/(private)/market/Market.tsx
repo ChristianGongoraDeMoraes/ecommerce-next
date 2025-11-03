@@ -60,17 +60,15 @@ export function Market() {
                 },
             });
             const requestCarrinhodata  = await requestCarrinho.json()
-            cart.clearCart(requestCarrinhodata.Products)
-            //cartHandler = user.cart      
-      }
-        //each HandleAddCart
-        //PATCH -> user.cart
+            cart.clearCart(requestCarrinhodata.Products)      
+      } 
     }
     
   
 
-  const handleAddCart = (item: Items) =>{
+  const handleAddCart = async (item: Items) =>{
     cart.addToCart(item)
+    cart.saveCart()
   }
 
   if (loading) return <p>Loading items...</p>
