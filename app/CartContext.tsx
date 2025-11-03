@@ -9,6 +9,7 @@ interface CartContextType {
   addToCart: (a:Items) => void;
   clearCart: (a:Items[])=>void;
   addArrayToCart: (a:Items[])=>void;
+  finalizarCompra: (cpf:string)=>void;
 }
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
@@ -50,8 +51,30 @@ export function CartProvider({ children }: { children: ReactNode }) {
     setCart(a)
   }
 
+  const finalizarCompra = (cpf:string) => {
+    (async () => {
+      const sessionDecoded = sessionStorage.getItem("token");
+      if(sessionDecoded){
+        const session:any = jwtDecode(sessionDecoded);
+        await fetch(`http://localhost:3001/compra`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body:JSON.stringify({
+            cpf: cpf,
+            Pessoa_id: session.sub,
+            total_price: 0,
+            produtos: cart
+          }),
+        });
+
+        clearCart([])
+      }
+    })()
+  }
   return (
-    <CartContext.Provider value={{ cart, saveCart, addToCart,  clearCart, addArrayToCart }}>
+    <CartContext.Provider value={{ cart, saveCart, addToCart,  clearCart, addArrayToCart, finalizarCompra}}>
       {children}
     </CartContext.Provider>
   );

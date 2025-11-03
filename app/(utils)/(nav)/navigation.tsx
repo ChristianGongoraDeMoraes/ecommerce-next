@@ -41,6 +41,9 @@ export function Navigation() {
                             <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
                                 <Link href="/market" >Market</Link>
                             </NavigationMenuLink>
+                            <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
+                                <Link href="/finalizar">Finalizados</Link>
+                            </NavigationMenuLink>
                         </NavigationMenuItem>      
             </NavigationMenuList>
             }
