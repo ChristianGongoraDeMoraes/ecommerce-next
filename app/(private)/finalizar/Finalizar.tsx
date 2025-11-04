@@ -5,6 +5,7 @@ import ItemFinalizar, { ItemFinalizarType } from "./ItemFinalizar";
 
 export default function Finalizar() {
     const [requestFinalizados, setRequestFinalizados] = useState<ItemFinalizarType[]>([]);
+    
     useEffect(()=>{
         (async()=>{
             const sessionDecoded = sessionStorage.getItem("token");
@@ -18,7 +19,34 @@ export default function Finalizar() {
                 });
                 if(request.ok){
                     const requestJson = await request.json()
-                    setRequestFinalizados(requestJson)
+                   
+
+                    for(let z of requestJson){
+                        // 🔹 1. Contar ocorrências por nome
+                        const mp = new Map();
+                        for (let item of z.produtos) {
+                        mp.set(item.name, (mp.get(item.name) ?? 0) + 1);
+                        }
+
+                        // 🔹 2. Criar array de produtos únicos
+                        const newProdutosArray: any[] = [];
+                        const nomesVistos = new Set();
+
+                        for (let item of z.produtos) {
+                        if (!nomesVistos.has(item.name)) {
+                            nomesVistos.add(item.name);
+                            newProdutosArray.push({
+                            ...item,
+                            quantidade: mp.get(item.name), // adiciona campo quantidade
+                            });
+                        }
+                        }
+
+                        // 🔹 3. Atualizar JSON final
+                        z.produtos = [...newProdutosArray];
+
+                        setRequestFinalizados(requestJson);
+                    }
                 }
             }
         })()

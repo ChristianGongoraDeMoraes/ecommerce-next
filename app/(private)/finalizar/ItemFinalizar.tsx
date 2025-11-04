@@ -13,6 +13,7 @@ export type ItemFinalizarType = {
         "price": number,
         "amount_on_storage": number,
         "description": string,
+        "quantidade":number
     }]
 }
 
@@ -29,9 +30,12 @@ const ItemCard = (props: ItemFinalizarType) => {
             <p>Produtos:</p>
             <p>{props.produtos.map((i)=>{
                 return(
-                <div className='flex'>
+                <div className='flex flex-col'>
+                  <div className='flex'>
                     <p>{i.name}</p>
                     <p>. R$:{i.price}</p>
+                  </div>
+                    <p> Quantidade: {i.quantidade} </p>
                 </div>
                 )})
             }</p>
