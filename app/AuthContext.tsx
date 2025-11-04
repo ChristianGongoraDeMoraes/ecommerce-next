@@ -1,5 +1,6 @@
 'use client'
 import { createContext, useContext, useEffect, useState, ReactNode } from "react";
+import Cookies from 'js-cookie';
 
 interface AuthContextType {
   token: string | null;
@@ -27,6 +28,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   // função de logout
   const logout = () => {
     sessionStorage.removeItem("token");
+    localStorage.removeItem("token")
+    Cookies.remove("token")
     setToken(null);
   };
 

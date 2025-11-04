@@ -13,6 +13,7 @@ import {
 import { useEffect, useState } from "react";
 import { useAuth } from "@/app/AuthContext";
 import { useCart } from "@/app/CartContext";
+import { Pointer } from "lucide-react";
 
 export function Navigation() {
     const[token, setToken] = useState<string | null>(null)
@@ -50,6 +51,10 @@ export function Navigation() {
                             </NavigationMenuLink>
                             <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
                                 <Link href="/finalizar">Finalizados</Link>
+                            </NavigationMenuLink>
+                            <NavigationMenuLink asChild className={`${navigationMenuTriggerStyle()} cursor-pointer`}
+                            onClick={()=>{auth.logout() }}>
+                                <a href="/login">Logout</a>
                             </NavigationMenuLink>
                         </NavigationMenuItem>      
             </NavigationMenuList>
