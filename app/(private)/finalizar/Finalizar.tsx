@@ -2,11 +2,17 @@
 import { jwtDecode } from "jwt-decode";
 import { useEffect, useState } from "react"
 import ItemFinalizar, { ItemFinalizarType } from "./ItemFinalizar";
+import Cookies from 'js-cookie';
+import { useAuth } from "@/app/AuthContext";
+
 
 export default function Finalizar() {
     const [requestFinalizados, setRequestFinalizados] = useState<ItemFinalizarType[]>([]);
-    
+    const auth = useAuth()
     useEffect(()=>{
+        const value = Cookies.get('token'); 
+          if (value) auth.login(value);
+          
         (async()=>{
             const sessionDecoded = sessionStorage.getItem("token");
             if(sessionDecoded){
@@ -52,10 +58,10 @@ export default function Finalizar() {
         })()
     },[])
   return (
-    <div className="w-full flex justify-center p-5">
+    <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {  requestFinalizados.map((i:any)=>{
             return(
-                <div className="p-5 bg-gray-600 rounded">
+                <div className="p-5 bg-gray-600 rounded-lg flex justify-center items-center">
                     <ItemFinalizar
                         {...i}
                     />

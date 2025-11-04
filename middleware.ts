@@ -17,6 +17,7 @@ export default async function middleware(req: NextRequest) {
   if(sessionDecoded){
       //const session = await jwt.decode(sessionDecoded);
       
+
       if (isPublicRoute && sessionDecoded) {
         return NextResponse.redirect(new URL("/market", req.nextUrl));
       }

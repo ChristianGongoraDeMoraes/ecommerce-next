@@ -19,7 +19,7 @@ export type ItemFinalizarType = {
 
 const ItemCard = (props: ItemFinalizarType) => {
   return (
-    <Card className='w-[200px] h-[300px] py-0 flex-col gap-0'>
+    <Card className='w-[200px] min-h-[300px] py-0 flex-col gap-0'>
       <div className='w-[100%]'>
         <CardHeader className='pt-3'>
           <CardTitle>{props.cpf}</CardTitle>
@@ -28,14 +28,14 @@ const ItemCard = (props: ItemFinalizarType) => {
         <CardFooter className='gap-3 py-3 flex flex-wrap'>
           <div>
             <p>Produtos:</p>
-            <p>{props.produtos.map((i)=>{
+            <p className='ml-2'>{props.produtos.map((i)=>{
                 return(
-                <div className='flex flex-col'>
+                <div className='flex flex-col mb-3 p-2 border-2 rounded-lg'>
                   <div className='flex'>
-                    <p>{i.name}</p>
+                    <p className='font-bold'>{i.name}</p>
                     <p>. R$:{i.price}</p>
                   </div>
-                    <p> Quantidade: {i.quantidade} </p>
+                    <p> qnt: {i.quantidade} </p>
                 </div>
                 )})
             }</p>

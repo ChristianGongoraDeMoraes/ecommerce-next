@@ -4,12 +4,14 @@ import { useCart } from "@/app/CartContext";
 import ItemCart from "./ItemCart";
 import { Items } from "../market/Market";
 import { useEffect, useState } from "react";
+import { useAuth } from "@/app/AuthContext";
 
 export function Cart() {
   const cart = useCart()
   const[cpf, setCpf] = useState("");
   const [showCpfModal, setShowCpfModal] = useState<boolean>(false);
   const [cartState, setCartState] = useState<any[]>([]);
+
     useEffect(()=>{
         setCartState(cart.cart)
     },[cart.cart])

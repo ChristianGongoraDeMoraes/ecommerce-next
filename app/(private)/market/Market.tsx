@@ -4,7 +4,8 @@ import ItemCard from "./ItemCard";
 import { useCart } from "@/app/CartContext";
 import { request } from "http";
 import { jwtDecode } from "jwt-decode";
-
+import { useAuth } from "@/app/AuthContext";
+import Cookies from 'js-cookie';
 
 export type Items = {
     "id": number,
@@ -19,8 +20,11 @@ export function Market() {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
   const cart = useCart();
+  const auth = useAuth()
   
   useEffect(() => {
+    const value = Cookies.get('token'); 
+          if (value) auth.login(value);
     fetchItems()
     getCart()
   }, [])

@@ -1,6 +1,5 @@
 'use client'
 import { createContext, useContext, useEffect, useState, ReactNode } from "react";
-import Cookies from 'js-cookie';
 
 interface AuthContextType {
   token: string | null;
@@ -15,14 +14,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   // ao iniciar, verifica se há token no sessionStorage
   useEffect(() => {
-    async ()=>{
-      const storedToken = sessionStorage.getItem("token");
-      const value = Cookies.get('token'); 
-      if (value) setToken(value);
-      if (storedToken) setToken(storedToken);
-      if(value && !storedToken){
-        sessionStorage.setItem("token", value)
-      }
+    async ()=>{     
     }
   }, []);
 

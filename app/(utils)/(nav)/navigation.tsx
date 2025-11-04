@@ -12,11 +12,18 @@ import {
 } from "@/components/ui/navigation-menu"
 import { useEffect, useState } from "react";
 import { useAuth } from "@/app/AuthContext";
+import { useCart } from "@/app/CartContext";
 
 export function Navigation() {
-    const { token } = useAuth();
-
-    
+    const[token, setToken] = useState<string | null>(null)
+    const auth = useAuth();
+    const cart = useCart();
+    useEffect(()=>{
+        setToken(auth.token)
+    }, [cart.cart])
+   useEffect(()=>{
+        setToken(auth.token)
+    }, [auth.token])
 
   return (
     <div className="w-full flex justify-center align-center p-[0px] 
