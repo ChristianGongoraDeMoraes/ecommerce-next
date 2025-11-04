@@ -60,6 +60,7 @@ export function Cart() {
                         amount_on_storage= {i.amount_on_storage}
                         description= {i.description}
                         handleRemoveToCart={handleRemoveToCart}
+                        picture={i.picture}
                     />
                 </div>
                 )

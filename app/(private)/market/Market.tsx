@@ -12,7 +12,8 @@ export type Items = {
 	"name": string,
 	"price": number,
 	"amount_on_storage": number,
-	"description": string
+	"description": string,
+  "picture": string
 }
 
 export function Market() {
@@ -90,6 +91,7 @@ export function Market() {
                     amount_on_storage= {i.amount_on_storage}
                     description= {i.description}
                     handler={handleAddCart}
+                    picture={i.picture}
                 />
             </div>
             )

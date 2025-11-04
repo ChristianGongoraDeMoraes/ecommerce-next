@@ -8,6 +8,7 @@ type ItemCard = {
 	"price": number,
 	"amount_on_storage": number,
 	"description": string,
+  "picture": string
   handler:(item: Items)=>void;
 }
 
@@ -16,7 +17,7 @@ const ItemCard = (props: ItemCard) => {
     <Card className='w-[200px] h-[300px] py-0 flex-col gap-0'>
       <CardContent className='grow-1 px-0 m-0'>
         <img
-          src='https://cdn.shadcnstudio.com/ss-assets/components/card/image-3.png'
+          src={`http://localhost:3001/pictures/${props.picture}`}
           alt='Banner'
           className='w-full h-[100px] rounded-lg'
         />
@@ -38,6 +39,7 @@ const ItemCard = (props: ItemCard) => {
             price: props.price,
             amount_on_storage: props.amount_on_storage,
             description: props.description,
+            picture: props.picture
           })}}>
             Add to Cart
           </Button>

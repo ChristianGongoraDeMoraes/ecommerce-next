@@ -9,6 +9,7 @@ type ItemCart = {
 	"price": number,
 	"amount_on_storage": number,
 	"description": string,
+  "picture": string,
   handleRemoveToCart:(item: Items)=>void;
 }
 
@@ -18,7 +19,7 @@ const ItemCard = (props: ItemCart) => {
     <Card className='w-full h-[200px] py-0 flex gap-0 flex-row'>
       <CardContent className='grow-1 px-0 m-0'>
         <img
-          src='https://cdn.shadcnstudio.com/ss-assets/components/card/image-3.png'
+          src={`http://localhost:3001/pictures/${props.picture}`}
           alt='Banner'
           className='w-[300px] h-[200px] rounded-lg'
         />
@@ -37,6 +38,7 @@ const ItemCard = (props: ItemCart) => {
             price: props.price,
             amount_on_storage: props.amount_on_storage,
             description: props.description,
+            picture: props.picture
           })}}
           className='mr-[10px] bg-transparent bg-gradient-to-br from-red-500 to-white-500 text-white focus-visible:ring-pink-600/20'>
             Remove
