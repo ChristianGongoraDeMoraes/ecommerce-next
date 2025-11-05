@@ -61,14 +61,15 @@ export default function Finalizar() {
     <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {  requestFinalizados.map((i:any)=>{
             return(
-                <div className="p-5 bg-gray-600 rounded-lg flex justify-center items-center">
+                <div className="p-5 rounded-lg flex justify-center items-center">
                     <ItemFinalizar
                         {...i}
-                    />
+                        />
                 </div>
             )
         })
-        }
+    }
     </div>
   )
 }
+//bg-transparent bg-gradient-to-br from-green-400 to-blue-400 text-black focus-visible:ring-green-300/20

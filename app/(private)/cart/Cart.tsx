@@ -49,7 +49,7 @@ export function Cart() {
                     Finalizar compra
                 </button>
             </div>
-        <div className="w-[60%] m-auto rounded-lg flex items-center justify-center flex-col bg-gray-400/40 p-6 gap-6">
+        <div className="w-[60%] m-auto rounded-lg flex items-center justify-center flex-col bg-gray-400/40 p-6 gap-6 mb-5">
             {cartState.map((i: Items)=>{
                 return(
                 <div className="w-full">
@@ -70,6 +70,7 @@ export function Cart() {
                 showCpfModal &&
                 <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2
                 fixed
+                text-black
                  w-[101%] h-[101vh] bg-black flex justify-center items-center z-50">
                     <div className="w-[70%] h-[70vh] flex flex-col items-center bg-white rounded-lg">
                         <div className="w-full flex justify-end">
@@ -93,7 +94,9 @@ export function Cart() {
                         </p>
                         </div>
                         <button 
-                        onClick={()=>{finalizarCompra()}}
+                        onClick={()=>{
+                            finalizarCompra()
+                            showCpfModalFunc()}}
                         className="
                         w-[30%] mx-auto
                         bg-transparent bg-gradient-to-br from-blue-500 to-white-500 text-black focus-visible:ring-gray-600/20 cursor-pointer p-2 rounded-lg hover:bg-black font-semibold">

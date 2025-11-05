@@ -14,7 +14,7 @@ type ItemCard = {
 
 const ItemCard = (props: ItemCard) => {
   return (
-    <Card className='w-[200px] h-[300px] py-0 flex-col gap-0'>
+    <Card className='w-[200px] min-h-[300px] py-0 flex-col gap-0'>
       <CardContent className='grow-1 px-0 m-0'>
         <img
           src={`http://localhost:3001/pictures/${props.picture}`}

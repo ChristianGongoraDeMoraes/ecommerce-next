@@ -19,22 +19,27 @@ export type ItemFinalizarType = {
 
 const ItemCard = (props: ItemFinalizarType) => {
   return (
-    <Card className='w-[200px] min-h-[300px] py-0 flex-col gap-0'>
+    <Card className='w-[90%] min-h-[300px] py-0 flex-col gap-0 font-medium
+    bg-gradient-to-r from-blue-900/10 to-green-900/30
+
+    '>
       <div className='w-[100%]'>
         <CardHeader className='pt-3'>
-          <CardTitle>{props.cpf}</CardTitle>
-          <CardDescription className='text-gray font-small'>Total: R${props.total_price}</CardDescription>
+          <CardTitle className='text-lg border-b border-white pb-1 text-white text-center'>Cpf : {props.cpf}</CardTitle>
+          <CardDescription className='text-gray font-small text-white text-center'>💰 Total: {props.total_price} R$</CardDescription>
         </CardHeader>
         <CardFooter className='gap-3 py-3 flex flex-wrap'>
-          <div>
-            <p>Produtos:</p>
+          <div  className="w-full flex flex-col p-3 border-gray-200 rounded-xl shadow-sm bg-gray-50 
+          bg-transparent">
+            <p className='text-center text-white'>Produtos</p>
             <p className='ml-2'>{props.produtos.map((i)=>{
                 return(
-                <div className='flex flex-col mb-3 p-2 border-2 rounded-lg'>
-                  <div className='flex'>
-                    <p className='font-bold'>{i.name}</p>
-                    <p>. R$:{i.price}</p>
-                  </div>
+                <div className='flex flex-col mb-3 p-2 rounded-lg
+                border-b border-white pb-1 text-white text-center
+                text-white
+                hover:bg-white/20'>
+                    <p className='font-medium'>{i.name}</p>
+                    <p> R$: {i.price}</p>
                     <p> qnt: {i.quantidade} </p>
                 </div>
                 )})

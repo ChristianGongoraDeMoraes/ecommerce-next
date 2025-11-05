@@ -28,14 +28,19 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased
+         min-h-screen relative`}
       >
-        <AuthProvider>
-          <CartProvider>
-            <Navigation/>
-            {children}
-          </CartProvider>
-        </AuthProvider>
+        <div className="absolute inset-0 bg-gradient-to-tr from-green-500/60 via-teal-400/60 to-blue-100/60"></div>
+        <div className="absolute inset-0 bg-black/90 backdrop-blur-xl"></div>
+        <div className="relative z-10 text-white">
+          <AuthProvider>
+            <CartProvider>
+              <Navigation/>
+              {children}
+            </CartProvider>
+          </AuthProvider>
+        </div>
       </body>
     </html>
   );
