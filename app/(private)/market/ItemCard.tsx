@@ -1,6 +1,7 @@
 import { Card, CardContent, CardHeader, CardDescription, CardTitle, CardFooter } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Items } from '../market/Market'
+import { useRouter } from 'next/navigation'
 
 type ItemCard = {
   "id": number,
@@ -13,6 +14,7 @@ type ItemCard = {
 }
 
 const ItemCard = (props: ItemCard) => {
+  const router = useRouter()
   return (
     <Card className='w-[200px] min-h-[300px] py-0 flex-col gap-0'>
       <CardContent className='grow-1 px-0 m-0'>
@@ -29,7 +31,10 @@ const ItemCard = (props: ItemCard) => {
           <CardDescription className='text-black font-medium'>{props.price}</CardDescription>
         </CardHeader>
         <CardFooter className='gap-3 py-3 flex flex-wrap'>
-          <Button className='bg-transparent bg-gradient-to-br from-purple-500 to-pink-500 text-white focus-visible:ring-pink-600/20'>
+          <Button className='bg-transparent bg-gradient-to-br from-purple-500 to-pink-500 text-white focus-visible:ring-pink-600/20'
+          onClick={()=>{
+            router.push(`/produto?itemId=${props.id}`)
+          }}>
             Explore More
           </Button>
           <Button className='w-[100px] bg-black text-white focus-visible:ring-pink-600/20'
