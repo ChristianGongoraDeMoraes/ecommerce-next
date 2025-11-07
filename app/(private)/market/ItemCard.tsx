@@ -37,7 +37,7 @@ const ItemCard = (props: ItemCard) => {
           }}>
             Explore More
           </Button>
-          <Button className='w-[100px] bg-black text-white focus-visible:ring-pink-600/20'
+          <Button className='w-[100px] bg-black text-white focus-visible:ring-pink-600/20 cursor-pointer'
           onClick={() => {props.handler({
             id: props.id,
             name: props.name,
