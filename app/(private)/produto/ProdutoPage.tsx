@@ -3,6 +3,8 @@ import { useSearchParams } from "next/navigation"
 import { useEffect, useState } from "react"
 import { Items } from "../market/Market"
 import { useCart } from "@/app/CartContext"
+import { useAuth } from "@/app/AuthContext";
+import Cookies from 'js-cookie';
 
 type Produto = {
     id:number,
@@ -16,7 +18,12 @@ export default function ProdutoPage(){
     const [produto, setProduto] = useState<Produto | null>(null)
     const params = useSearchParams()
     const cart = useCart()
+    const auth = useAuth()
+
     useEffect(()=>{
+    const value = Cookies.get('token'); 
+          if (value) auth.login(value);
+
         getItem()
     },[])
 
